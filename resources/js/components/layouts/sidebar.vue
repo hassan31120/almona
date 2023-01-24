@@ -30,7 +30,7 @@
             aria-expanded="false"
             class="dropdown-toggle nav-link"
           >
-            <i class="fe fe-users fe-16"></i>
+            <i class="fe fe-user fe-16"></i>
             <span class="ml-3 item-text">الأعضاء</span>
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="members">
@@ -46,116 +46,266 @@
             </li>
           </ul>
         </li>
-        <!-- <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a
-            href="#countries"
+            href="#data"
             data-toggle="collapse"
             aria-expanded="false"
             class="dropdown-toggle nav-link"
           >
-            <i class="fe fe-pie-chart fe-16"></i>
-            <span class="ml-3 item-text">البلاد</span>
+            <i class="fe fe-database fe-16"></i>
+            <span class="ml-3 item-text">البيانات</span>
           </a>
-          <ul class="collapse list-unstyled pl-4 w-100" id="countries">
+          <ul class="collapse list-unstyled pl-4 w-100" id="data">
             <li class="nav-item">
               <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
-                ><span class="ml-1 item-text">كل البلاد</span>
+                ><span class="ml-1 item-text">عرض البيانات</span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
-                ><span class="ml-1 item-text">إضافة بلد جديد</span>
+                ><span class="ml-1 item-text">تعديل البيانات</span>
               </router-link>
             </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a
-            href="#categories"
+            href="#team"
             data-toggle="collapse"
             aria-expanded="false"
             class="dropdown-toggle nav-link"
           >
-            <i class="fe fe-layers fe-16"></i>
-            <span class="ml-3 item-text">القطاعات</span>
+            <i class="fe fe-users fe-16"></i>
+            <span class="ml-3 item-text">أعضاء الفريق</span>
           </a>
-          <ul class="collapse list-unstyled pl-4 w-100" id="categories">
+          <ul class="collapse list-unstyled pl-4 w-100" id="team">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
-                ><span class="ml-1 item-text">كل القطاعات</span>
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الأعضاء</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
-                ><span class="ml-1 item-text">إضافة قطاع جديد</span>
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة عضو جديد</span>
               </router-link>
             </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a
-            href="#chances"
+            href="#partners"
             data-toggle="collapse"
             aria-expanded="false"
             class="dropdown-toggle nav-link"
           >
-            <i class="fe fe-tag fe-16"></i>
-            <span class="ml-3 item-text">فرص الإمتياز</span>
+            <i class="fe fe-user-plus fe-16"></i>
+            <span class="ml-3 item-text">الشركاء</span>
           </a>
-          <ul class="collapse list-unstyled pl-4 w-100" id="chances">
+          <ul class="collapse list-unstyled pl-4 w-100" id="partners">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'chances' }"
-                ><span class="ml-1 item-text">كل الفرص</span>
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الشركاء</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_chance' }"
-                ><span class="ml-1 item-text">إضافة فرصة جديدة</span>
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة شريك جديد</span>
               </router-link>
             </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a
-            href="#noti"
+            href="#apps"
             data-toggle="collapse"
             aria-expanded="false"
             class="dropdown-toggle nav-link"
           >
-            <i class="fe fe-bell fe-16"></i>
-            <span class="ml-3 item-text">الإشعارات</span>
+            <i class="fe fe-code fe-16"></i>
+            <span class="ml-3 item-text">البرمجة</span>
           </a>
-          <ul class="collapse list-unstyled pl-4 w-100" id="noti">
+          <ul class="collapse list-unstyled pl-4 w-100" id="apps">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'noti' }"
-                ><span class="ml-1 item-text">إرسال اشعار جديد</span>
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الأقسام</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة قسم جديد</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">كل المشاريع البرمجية</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة مشروع جديد</span>
               </router-link>
             </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a
-            href="#settings"
+            href="#motion"
             data-toggle="collapse"
             aria-expanded="false"
             class="dropdown-toggle nav-link"
           >
-            <i class="fe fe-settings fe-16"></i>
-            <span class="ml-3 item-text">الإعدادات</span>
+            <i class="fe fe-video fe-16"></i>
+            <span class="ml-3 item-text">الموشن</span>
           </a>
-          <ul class="collapse list-unstyled pl-4 w-100" id="settings">
+          <ul class="collapse list-unstyled pl-4 w-100" id="motion">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'settings' }"
-                ><span class="ml-1 item-text">كل الإعدادات</span>
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الأقسام</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'edit_settings' }"
-                ><span class="ml-1 item-text">تعديل الإعدادات</span>
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة قسم جديد</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">عرض الفيديوهات</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة فيديو جديد</span>
               </router-link>
             </li>
           </ul>
-        </li> -->
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            href="#graphics"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle nav-link"
+          >
+            <i class="fe fe-figma fe-16"></i>
+            <span class="ml-3 item-text">التصاميم</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="graphics">
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الأقسام</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة قسم جديد</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل التصاميم</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة تصميم جديد</span>
+              </router-link>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            href="#products"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle nav-link"
+          >
+            <i class="fe fe-star fe-16"></i>
+            <span class="ml-3 item-text">المنتجات</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="products">
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الأقسام</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة قسم جديد</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل المنتجات</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة منتج جديد</span>
+              </router-link>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            href="#services"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle nav-link"
+          >
+            <i class="fe fe-server fe-16"></i>
+            <span class="ml-3 item-text">الخدمات</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="services">
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الخدمات</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+                ><span class="ml-1 item-text">إضافة خدمة جديدة</span>
+              </router-link>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            href="#orders"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle nav-link"
+          >
+            <i class="fe fe-git-pull-request fe-16"></i>
+            <span class="ml-3 item-text">الطلبات</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="orders">
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل الطلبات</span>
+              </router-link>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            href="#contact"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle nav-link"
+          >
+            <i class="fe fe-wifi fe-16"></i>
+            <span class="ml-3 item-text">التواصل</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+            <li class="nav-item">
+              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+                ><span class="ml-1 item-text">كل طلبات التواصل</span>
+              </router-link>
+            </li>
+          </ul>
+        </li>
       </ul>
       <div class="btn-box w-100 mt-4 mb-1" v-if="log == 1">
         <button
