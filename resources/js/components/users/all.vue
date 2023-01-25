@@ -62,7 +62,7 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            axios.post(`api/user/del/${id}`);
+            axios.post(`api/dash/user/del/${id}`);
             this.$swal.fire("تم!", "تم الحذف بنجاح", "success");
             this.fetchUsers();
           }
@@ -70,7 +70,7 @@ export default {
     },
     async fetchUsers() {
       axios
-        .get(`api/users`)
+        .get(`api/dash/users`)
         .then((res) => {
           this.users = res.data.users;
         })

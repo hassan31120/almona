@@ -134,7 +134,7 @@ export default {
     },
     async saveForm() {
         await axios
-        .post(`api/dashRegister`, this.form)
+        .post(`api/dash/user/add`, this.form)
         .then(() => {
           this.$router.push({ name: "users" });
           this.alert();

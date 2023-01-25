@@ -111,7 +111,7 @@ export default {
     },
     async user() {
       axios
-        .get(`/api/user/show/${this.id}`)
+        .get(`/api/dash/user/show/${this.id}`)
         .then((res) => {
           this.form = res.data.user;
         })
@@ -121,7 +121,7 @@ export default {
     },
     async saveForm() {
       axios
-        .post(`/api/user/edit/${this.id}`, this.form)
+        .post(`/api/dash/user/edit/${this.id}`, this.form)
         .then(() => {
           this.user();
           this.alert();
