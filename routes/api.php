@@ -74,12 +74,14 @@ Route::group(['prefix' => 'dash'], function () {
 
     // partners
     Route::get('/partners', [PartnerController::class, 'index']);
+    Route::get('/partner/show/{id}', [PartnerController::class, 'show']);
     Route::post('/partner/store', [PartnerController::class, 'store']);
     Route::post('/partner/update/{id}', [PartnerController::class, 'update']);
     Route::post('/partner/destroy/{id}', [PartnerController::class, 'destroy']);
 
     // teams
-    Route::get('/teams', [TeamController::class, 'index']);
+    Route::get('/team', [TeamController::class, 'index']);
+    Route::get('/team/show/{id}', [TeamController::class, 'show']);
     Route::post('/team/store', [TeamController::class, 'store']);
     Route::post('/team/update/{id}', [TeamController::class, 'update']);
     Route::post('/team/destroy/{id}', [TeamController::class, 'destroy']);
@@ -94,6 +96,7 @@ Route::group(['prefix' => 'dash'], function () {
 
     // services
     Route::get('/services', [ServiceController::class, 'index']);
+    Route::get('/service/show/{id}', [ServiceController::class, 'show']);
     Route::post('/service/store', [ServiceController::class, 'store']);
     Route::post('/service/update/{id}', [ServiceController::class, 'update']);
     Route::post('/service/destroy/{id}', [ServiceController::class, 'destroy']);

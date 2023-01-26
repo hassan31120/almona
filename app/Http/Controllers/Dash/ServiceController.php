@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ServiceResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Service;
@@ -11,15 +12,20 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        Carbon::setLocale('ar');
         $services = Service::all();
-        return view('admin.services.index', compact('services'));
+        if (count($services) > 0) {
+            return response()->json([
+                'success' => true,
+                'services' => ServiceResource::collection($services)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no services yet'
+            ], 404);
+        }
     }
 
-    public function create()
-    {
-        return view('admin.services.add');
-    }
 
     public function store(Request $request)
     {
@@ -38,39 +44,72 @@ class ServiceController extends Controller
             $data['image'] = $name;
         }
         Service::create($data);
-        return redirect(route('admin.services'))->with('success', 'تم إضافة الخدمة بنجاح');
+        return response()->json([
+            'success' => true,
+            'msg' => 'service has been addedd successfully'
+        ], 200);
     }
-
-    public function edit($id)
+    public function show($id)
     {
         $service = Service::find($id);
-        return view('admin.services.edit', compact('service'));
+        if ($service) {
+            return response()->json([
+                'success' => true,
+                'service' => new ServiceResource($service)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such service'
+            ], 404);
+        }
     }
 
     public function update(Request $request, $id)
     {
         $service = Service::find($id);
-        $request->validate([
-            'name' => 'required',
-            'desc' => 'required',
-            // 'price' => 'required',
-        ]);
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = 'storage/images/services/' . date('Y') . '/' . date('m') . '/';
-            $name = $path . time() . '-' . $file->getClientOriginalName();
-            $file->move($path, $name);
-            $data['image'] = $name;
+        if ($service) {
+
+            $request->validate([
+                'name' => 'required',
+                'desc' => 'required',
+                // 'price' => 'required',
+            ]);
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = 'storage/images/services/' . date('Y') . '/' . date('m') . '/';
+                $name = $path . time() . '-' . $file->getClientOriginalName();
+                $file->move($path, $name);
+                $data['image'] = $name;
+            }
+            $service->update($data);
+            return response()->json([
+                'success' => true,
+                'msg' => 'service has been updated successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such service'
+            ], 404);
         }
-        $service->update($data);
-        return redirect(route('admin.services'))->with('success', 'تم تعديل الخدمة بنجاح');
     }
 
     public function destroy($id)
     {
         $service = Service::find($id);
-        $service->delete();
-        return redirect(route('admin.services'))->with('success', 'تم حذف الخدمة بنجاح');
+        if ($service) {
+            $service->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'service has been deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such service'
+            ], 404);
+        }
     }
 }

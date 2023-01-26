@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TeamResource;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
@@ -15,26 +16,20 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::all();
-        return view('admin.team.index', compact('teams'));
+        $team = Team::all();
+        if (count($team) > 0) {
+            return response()->json([
+                'success' => true,
+                'teams' => TeamResource::collection($team)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no team yet'
+            ], 404);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.team.add');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -51,56 +46,55 @@ class TeamController extends Controller
             $data['image'] = $name;
         }
         Team::create($data);
-        return redirect(route('admin.teams'))->with('success', 'تم إضافة العضو بنجاح');
+        return response()->json([
+            'success' => true,
+            'msg' => 'member has been addedd to team successfully'
+        ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
         $team = Team::find($id);
-        return  view('admin.team.edit', compact('team'));
+        if ($team) {
+            return response()->json([
+                'success' => true,
+                'team' => new TeamResource($team)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such member'
+            ], 404);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $team = Team::find($id);
-        $request->validate([
-            'name' => 'required',
-            'job' => 'required'
-        ]);
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = 'storage/images/team/' . date('Y') . '/' . date('m') . '/';
-            $name = $path . time() . '-' .  $file->getClientOriginalName();
-            $file->move($path, $name);
-            $data['image'] = $name;
+        if ($team) {
+            $request->validate([
+                'name' => 'required',
+                'job' => 'required'
+            ]);
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = 'storage/images/team/' . date('Y') . '/' . date('m') . '/';
+                $name = $path . time() . '-' .  $file->getClientOriginalName();
+                $file->move($path, $name);
+                $data['image'] = $name;
+            }
+            $team->update($data);
+            return response()->json([
+                'success' => true,
+                'msg' => 'member has been updated in team successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such member'
+            ], 404);
         }
-        $team->update($data);
-        return redirect(route('admin.teams'))->with('success', 'تم تعديل العضو بنجاح');
     }
 
     /**
@@ -112,7 +106,17 @@ class TeamController extends Controller
     public function destroy($id)
     {
         $team = Team::find($id);
-        $team->delete();
-        return redirect(route('admin.teams'))->with('success', 'تم حذف العضو بنجاح');
+        if ($team) {
+            $team->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'member has been deleted from team successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such member'
+            ], 404);
+        }
     }
 }

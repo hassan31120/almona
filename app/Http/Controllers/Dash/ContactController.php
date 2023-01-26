@@ -3,22 +3,41 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ContactResource;
 use App\Models\Contact;
-use Carbon\Carbon;
 
 class ContactController extends Controller
 {
     public function index()
     {
-        Carbon::setLocale('ar');
         $contacts = Contact::all();
-        return view('admin.contacts.index', compact('contacts'));
+        if (count($contacts) > 0) {
+            return response()->json([
+                'success' => true,
+                'contacts' => ContactResource::collection($contacts)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no contacts yet'
+            ], 404);
+        }
     }
 
     public function destroy($id)
     {
         $contact = Contact::find($id);
-        $contact->delete();
-        return redirect(route('admin.contacts'))->with('success', 'تم حذف التواصل بنجاح');
+        if ($contact) {
+            $contact->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'contact has been deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such contact'
+            ], 404);
+        }
     }
 }

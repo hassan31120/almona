@@ -3,40 +3,28 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PartnerResource;
 use App\Models\Partner;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        Carbon::setLocale('ar');
         $partners = Partner::all();
-        return view('admin.partners.index', compact('partners'));
+        if (count($partners) > 0) {
+            return response()->json([
+                'success' => true,
+                'partners' => PartnerResource::collection($partners)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no partners yet'
+            ], 404);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.partners.add');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -51,64 +39,67 @@ class PartnerController extends Controller
             $data['image'] = $name;
         }
         Partner::create($data);
-        return redirect(route('admin.partners'))->with('success', 'تم إضافة الشريك بنجاح');
+        return response()->json([
+            'success' => true,
+            'msg' => 'partner has been addedd successfully'
+        ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
         $partner = Partner::find($id);
-        return view('admin.partners.edit', compact('partner'));
+        if ($partner) {
+            return response()->json([
+                'success' => true,
+                'partner' => new PartnerResource($partner)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such partner'
+            ], 404);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $partner = Partner::find($id);
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = 'storage/images/partners/' . date('Y') . '/' . date('m') . '/';
-            $name = $path . time() . '-' . $file->getClientOriginalName();
-            $file->move($path, $name);
-            $data['image'] = $name;
+        if ($partner) {
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = 'storage/images/partners/' . date('Y') . '/' . date('m') . '/';
+                $name = $path . time() . '-' . $file->getClientOriginalName();
+                $file->move($path, $name);
+                $data['image'] = $name;
+            }
+            $partner->update($data);
+            return response()->json([
+                'success' => true,
+                'msg' => 'partner has been updated successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such partner'
+            ], 404);
         }
-        $partner->update($data);
-        return redirect()->back()->with('success', 'تم تعديل الشريك بنجاح');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $partner = Partner::find($id);
-        $partner->delete();
-        return redirect(route('admin.partners'))->with('success', 'تم حذف الشريك بنجاح');
+        if ($partner) {
+            $partner->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'partner has been deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such partner'
+            ], 404);
+        }
     }
 }
