@@ -11,6 +11,7 @@ use App\Http\Controllers\Dash\ContactController;
 use App\Http\Controllers\Dash\GraphicCatController;
 use App\Http\Controllers\Dash\GraphicController;
 use App\Http\Controllers\Dash\InfoController;
+use App\Http\Controllers\Dash\MotionCatController;
 use App\Http\Controllers\Dash\MotionController;
 use App\Http\Controllers\Dash\OrderController;
 use App\Http\Controllers\Dash\PartnerController;
@@ -103,18 +104,28 @@ Route::group(['prefix' => 'dash'], function () {
 
     // articles
     Route::get('/articles', [ArticleController::class, 'index']);
+    Route::get('/article/show/{id}', [ArticleController::class, 'show']);
     Route::post('/article/store', [ArticleController::class, 'store']);
     Route::post('/article/update/{id}', [ArticleController::class, 'update']);
     Route::post('/article/destroy/{id}', [ArticleController::class, 'destroy']);
 
+    // app cats
+    Route::get('/Appcats', [AppCatController::class, 'index']);
+    Route::get('/Appcat/show/{id}', [AppCatController::class, 'show']);
+    Route::post('/Appcat/store', [AppCatController::class, 'store']);
+    Route::post('/Appcat/update/{id}', [AppCatController::class, 'update']);
+    Route::post('/Appcat/destroy/{id}', [AppCatController::class, 'destroy']);
+
     // apps
     Route::get('/apps', [AppController::class, 'index']);
+    Route::get('/app/show/{id}', [AppController::class, 'show']);
     Route::post('/app/store', [AppController::class, 'store']);
     Route::post('/app/update/{id}', [AppController::class, 'update']);
     Route::post('/app/destroy/{id}', [AppController::class, 'destroy']);
 
     // product cats
     Route::get('/cats', [CatController::class, 'index']);
+    Route::get('/cat/show/{id}', [CatController::class, 'show']);
     Route::post('/cat/store', [CatController::class, 'store']);
     Route::post('/cat/update/{id}', [CatController::class, 'update']);
     Route::post('/cat/destroy/{id}', [CatController::class, 'destroy']);
@@ -125,14 +136,9 @@ Route::group(['prefix' => 'dash'], function () {
     Route::post('/product/update/{id}', [ProductController::class, 'update']);
     Route::post('/product/destroy/{id}', [ProductController::class, 'destroy']);
 
-    // app cats
-    Route::get('/Appcats', [AppCatController::class, 'index']);
-    Route::post('/Appcat/store', [AppCatController::class, 'store']);
-    Route::post('/Appcat/update/{id}', [AppCatController::class, 'update']);
-    Route::post('/Appcat/destroy/{id}', [AppCatController::class, 'destroy']);
-
     // motion cats
-    Route::get('/motioncats', [MotionController::class, 'index']);
+    Route::get('/motioncats', [MotionCatController::class, 'index']);
+    Route::get('/motioncat/show/{id}', [MotionCatController::class, 'show']);
     Route::post('/motioncat/store', [MotionCatController::class, 'store']);
     Route::post('/motioncat/update/{id}', [MotionCatController::class, 'update']);
     Route::post('/motioncat/destroy/{id}', [MotionCatController::class, 'destroy']);
@@ -145,6 +151,7 @@ Route::group(['prefix' => 'dash'], function () {
 
     // graphic cats
     Route::get('/graphiccats', [GraphicCatController::class, 'index']);
+    Route::get('/graphiccat/show/{id}', [GraphicCatController::class, 'show']);
     Route::post('/graphiccat/store', [GraphicCatController::class, 'store']);
     Route::post('/graphiccat/update/{id}', [GraphicCatController::class, 'update']);
     Route::post('/graphiccat/destroy/{id}', [GraphicCatController::class, 'destroy']);
