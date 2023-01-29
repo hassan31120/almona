@@ -3,24 +3,26 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Models\Category;
 use App\Models\Product;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        Carbon::setLocale('ar');
         $products = Product::all();
-        return view('admin.products.index', compact('products'));
-    }
-
-    public function create()
-    {
-        $cats = Category::all();
-        return view('admin.products.add', compact('cats'));
+        if (count($products) > 0) {
+            return response()->json([
+                'success' => true,
+                'products' => ProductResource::collection($products)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no products yet'
+            ], 404);
+        }
     }
 
     public function store(Request $request)
@@ -42,46 +44,74 @@ class ProductController extends Controller
             $data['image'] = $name;
         }
         Product::create($data);
-        return redirect(route('admin.products'))->with('success', 'تم إضاقة المنتج بنجاح');
+        return response()->json([
+            'success' => true,
+            'msg' => 'product has been addedd successfully'
+        ], 200);
     }
 
-    public function edit($id)
+    public function show($id)
     {
-        $cats = Category::all();
         $product = Product::find($id);
-        return view('admin.products.edit', compact('product', 'cats'));
+        if ($product) {
+            return response()->json([
+                'success' => true,
+                'product' => new ProductResource($product)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such product'
+            ], 404);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $article = Product::find($id);
-        $request->validate([
-            'title' => 'required',
-            'desc' => 'required',
-        ]);
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = 'storage/images/products/imgages/' . date('Y') . '/' . date('m') . '/';
-            $name = $path . time() . '-' . $file->getClientOriginalName();
-            $file->move($path, $name);
-            $data['image'] = $name;
+        $product = Product::find($id);
+        if ($product) {
+            $request->validate([
+                'title' => 'required',
+                'desc' => 'required',
+                'ads' => 'required',
+                'price' => 'required|numeric',
+                'cat_id' => 'required'
+            ]);
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = 'storage/images/products/imgages/' . date('Y') . '/' . date('m') . '/';
+                $name = $path . time() . '-' . $file->getClientOriginalName();
+                $file->move($path, $name);
+                $data['image'] = $name;
+            }
+            $product->update($data);
+            return response()->json([
+                'success' => true,
+                'msg' => 'product has been updated successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such product'
+            ], 404);
         }
-        if ($request->hasFile('banner')) {
-            $file = $request->file('banner');
-            $path = 'storage/images/products/banners/' . date('Y') . '/' . date('m') . '/';
-            $name = $path . time() . '-' . $file->getClientOriginalName();
-            $file->move($path, $name);
-            $data['banner'] = $name;
-        }
-        $article->update($data);
-        return redirect(route('admin.products'))->with('success', 'تم تعديل المنتج بنجاح');
     }
 
     public function destroy($id)
     {
-        $article = Product::find($id);
-        $article->delete();
-        return redirect(route('admin.products'))->with('success', 'تم حذف المنتج بنجاح');
+        $product = Product::find($id);
+        if ($product) {
+            $product->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'product has been deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such product'
+            ], 404);
+        }
     }
 }

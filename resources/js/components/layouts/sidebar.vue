@@ -14,9 +14,11 @@
     <nav class="vertnav navbar navbar-light">
       <!-- nav bar -->
       <div class="w-100 mb-4 d-flex">
-        <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
-          <img src="@/assets/faf.png" alt="logo" width="220" height="60" />
-        </a>
+        <router-link
+          class="navbar-brand mx-auto mt-2 flex-fill text-center"
+          :to="{ name: 'home' }"
+          ><img src="@/assets/faf.png" alt="logo" width="220" height="60" />
+        </router-link>
       </div>
 
       <p class="text-muted nav-heading mt-4 mb-1">
@@ -58,12 +60,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="data">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">عرض البيانات</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">تعديل البيانات</span>
               </router-link>
             </li>
@@ -81,12 +83,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="team">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الأعضاء</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة عضو جديد</span>
               </router-link>
             </li>
@@ -104,12 +106,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="partners">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الشركاء</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة شريك جديد</span>
               </router-link>
             </li>
@@ -127,22 +129,22 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="apps">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الأقسام</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة قسم جديد</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">كل المشاريع البرمجية</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة مشروع جديد</span>
               </router-link>
             </li>
@@ -160,22 +162,22 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="motion">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الأقسام</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة قسم جديد</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">عرض الفيديوهات</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة فيديو جديد</span>
               </router-link>
             </li>
@@ -193,22 +195,22 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="graphics">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الأقسام</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة قسم جديد</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل التصاميم</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة تصميم جديد</span>
               </router-link>
             </li>
@@ -226,22 +228,22 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="products">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الأقسام</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة قسم جديد</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل المنتجات</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة منتج جديد</span>
               </router-link>
             </li>
@@ -259,12 +261,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="services">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الخدمات</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_country' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
                 ><span class="ml-1 item-text">إضافة خدمة جديدة</span>
               </router-link>
             </li>
@@ -282,7 +284,7 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="orders">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل الطلبات</span>
               </router-link>
             </li>
@@ -300,7 +302,7 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="contact">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'countries' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
                 ><span class="ml-1 item-text">كل طلبات التواصل</span>
               </router-link>
             </li>

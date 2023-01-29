@@ -132,6 +132,7 @@ Route::group(['prefix' => 'dash'], function () {
 
     // products
     Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/product/show/{id}', [ProductController::class, 'show']);
     Route::post('/product/store', [ProductController::class, 'store']);
     Route::post('/product/update/{id}', [ProductController::class, 'update']);
     Route::post('/product/destroy/{id}', [ProductController::class, 'destroy']);
@@ -145,6 +146,7 @@ Route::group(['prefix' => 'dash'], function () {
 
     // motions
     Route::get('/motions', [MotionController::class, 'index']);
+    Route::get('/motion/show/{id}', [MotionController::class, 'show']);
     Route::post('/motion/store', [MotionController::class, 'store']);
     Route::post('/motion/update/{id}', [MotionController::class, 'update']);
     Route::post('/motion/destroy/{id}', [MotionController::class, 'destroy']);
@@ -158,6 +160,7 @@ Route::group(['prefix' => 'dash'], function () {
 
     // graphics
     Route::get('/graphics', [GraphicController::class, 'index']);
+    Route::get('/graphic/show/{id}', [GraphicController::class, 'show']);
     Route::post('/graphic/store', [GraphicController::class, 'store']);
     Route::post('/graphic/update/{id}', [GraphicController::class, 'update']);
     Route::post('/graphic/destroy/{id}', [GraphicController::class, 'destroy']);

@@ -3,24 +3,26 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MotionResource;
 use App\Models\Motion;
-use App\Models\MotionCat;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class MotionController extends Controller
 {
     public function index()
     {
-        Carbon::setLocale('ar');
-        $apps = Motion::all();
-        return view('admin.motions.index', compact('apps'));
-    }
-
-    public function create()
-    {
-        $cats = MotionCat::all();
-        return view('admin.motions.add', compact('cats'));
+        $videos = Motion::all();
+        if (count($videos) > 0) {
+            return response()->json([
+                'success' => true,
+                'videos' => MotionResource::collection($videos)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no videos yet'
+            ], 404);
+        }
     }
 
     public function store(Request $request)
@@ -32,45 +34,77 @@ class MotionController extends Controller
         $data = $request->all();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $path = 'storage/images/motions/' . date('Y') . '/' . date('m') . '/';
+            $path = 'storage/images/videos/' . date('Y') . '/' . date('m') . '/';
             $name = $path . time() . '-' . $file->getClientOriginalName();
             $file->move($path, $name);
             $data['image'] = $name;
         }
-        $app = Motion::create($data);
-        return redirect(route('admin.motions'))->with('success', 'تم إضافة الفيديو بنجاح');
+        $video = Motion::create($data);
+        return response()->json([
+            'success' => true,
+            'msg' => 'video has been addedd successfully'
+        ], 200);
     }
 
-    public function edit($id)
+    public function show($id)
     {
-        $cats = MotionCat::all();
-        $app = Motion::find($id);
-        return view('admin.motions.edit', compact('app', 'cats'));
+        $video = Motion::find($id);
+        if ($video) {
+            return response()->json([
+                'success' => true,
+                'video' => new MotionResource($video)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such video'
+            ], 404);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $app = Motion::find($id);
-        $request->validate([
-            'link' => 'required',
-            'cat_id' => 'required'
-        ]);
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = 'storage/images/motions/' . date('Y') . '/' . date('m') . '/';
-            $name = $path . time() . '-' . $file->getClientOriginalName();
-            $file->move($path, $name);
-            $data['image'] = $name;
+        $video = Motion::find($id);
+        if ($video) {
+            $request->validate([
+                'link' => 'required',
+                'cat_id' => 'required'
+            ]);
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = 'storage/images/motions/' . date('Y') . '/' . date('m') . '/';
+                $name = $path . time() . '-' . $file->getClientOriginalName();
+                $file->move($path, $name);
+                $data['image'] = $name;
+            }
+            $video->update($data);
+            return response()->json([
+                'success' => true,
+                'msg' => 'video has been updated successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such video'
+            ], 404);
         }
-        $app->update($data);
-        return redirect(route('admin.motions'))->with('success', 'تم تعديل الفيديو بنجاح');
     }
 
     public function destroy($id)
     {
-        $app = Motion::find($id);
-        $app->delete();
-        return redirect(route('admin.motions'))->with('success', 'تم حذف الفيديو بنجاح');
+        $video = Motion::find($id);
+        if ($video) {
+            $video->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'video has been deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such video'
+            ], 404);
+        }
     }
 }

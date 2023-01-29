@@ -3,24 +3,26 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\GraphicResource;
 use App\Models\Graphic;
-use App\Models\GraphicCat;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class GraphicController extends Controller
 {
     public function index()
     {
-        Carbon::setLocale('ar');
-        $apps = Graphic::all();
-        return view('admin.graphics.index', compact('apps'));
-    }
-
-    public function create()
-    {
-        $cats = GraphicCat::all();
-        return view('admin.graphics.add', compact('cats'));
+        $graphics = Graphic::all();
+        if (count($graphics) > 0) {
+            return response()->json([
+                'success' => true,
+                'graphics' => GraphicResource::collection($graphics)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no graphics yet'
+            ], 404);
+        }
     }
 
     public function store(Request $request)
@@ -37,39 +39,71 @@ class GraphicController extends Controller
             $file->move($path, $name);
             $data['image'] = $name;
         }
-        $app = Graphic::create($data);
-        return redirect(route('admin.graphics'))->with('success', 'تم إضافة التصميم بنجاح');
+        $graphic = Graphic::create($data);
+        return response()->json([
+            'success' => true,
+            'msg' => 'graphic has been addedd successfully'
+        ], 200);
     }
 
-    public function edit($id)
+    public function show($id)
     {
-        $cats = GraphicCat::all();
-        $app = Graphic::find($id);
-        return view('admin.graphics.edit', compact('app', 'cats'));
+        $graphic = Graphic::find($id);
+        if ($graphic) {
+            return response()->json([
+                'success' => true,
+                'graphic' => new GraphicResource($graphic)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such graphic'
+            ], 404);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $app = Graphic::find($id);
-        $request->validate([
-            'cat_id' => 'required'
-        ]);
-        $data = $request->all();
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $path = 'storage/images/graphics/' . date('Y') . '/' . date('m') . '/';
-            $name = $path . time() . '-' . $file->getClientOriginalName();
-            $file->move($path, $name);
-            $data['image'] = $name;
+        $graphic = Graphic::find($id);
+        if ($graphic) {
+            $request->validate([
+                'cat_id' => 'required'
+            ]);
+            $data = $request->all();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $path = 'storage/images/graphics/' . date('Y') . '/' . date('m') . '/';
+                $name = $path . time() . '-' . $file->getClientOriginalName();
+                $file->move($path, $name);
+                $data['image'] = $name;
+            }
+            $graphic->update($data);
+            return response()->json([
+                'success' => true,
+                'msg' => 'graphic has been updated successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such graphic'
+            ], 404);
         }
-        $app->update($data);
-        return redirect(route('admin.graphics'))->with('success', 'تم تعديل التصميم بنجاح');
     }
 
     public function destroy($id)
     {
-        $app = Graphic::find($id);
-        $app->delete();
-        return redirect(route('admin.graphics'))->with('success', 'تم حذف التصميم بنجاح');
+        $graphic = Graphic::find($id);
+        if ($graphic) {
+            $graphic->delete();
+            return response()->json([
+                'success' => true,
+                'msg' => 'graphic has been deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'there is no such graphic'
+            ], 404);
+        }
     }
 }

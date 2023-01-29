@@ -48,6 +48,7 @@ class ServiceController extends Controller
             'msg' => 'service has been addedd successfully'
         ], 200);
     }
+    
     public function show($id)
     {
         $service = Service::find($id);

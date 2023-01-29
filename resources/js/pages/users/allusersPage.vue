@@ -2,17 +2,17 @@
   <div class="wrapper">
     <navbar />
     <sidebar />
-    <edit_settings />
+    <users />
   </div>
 </template>
 
 <script>
 import navbar from "../../components/layouts/navbar.vue";
 import sidebar from "../../components/layouts/sidebar.vue";
-import edit_settings from "../../components/settings/edit.vue";
+import users from "../../components/users/all.vue";
 export default {
-  name: "edit_settingsPage",
-  components: { navbar, sidebar, edit_settings },
+  name: "allusersPage",
+  components: { navbar, sidebar, users },
 };
 </script>
 
