@@ -1,5 +1,8 @@
 <template>
   <main role="main" class="main-content">
+    <div v-if="loading">
+      <div><loadingPage /></div>
+    </div>
     <div class="container-fluid">
       <h2 class="h5 page-title pb-5">كل الأعضاء</h2>
 
@@ -37,11 +40,15 @@
 </template>
 
 <script>
+import loadingPage from "../layouts/laoding.vue";
+
 export default {
   name: "users",
+  components: { loadingPage },
   data() {
     return {
       users: [],
+      loading: false,
     };
   },
   mounted() {
@@ -69,7 +76,8 @@ export default {
         });
     },
     async fetchUsers() {
-      axios
+      this.loading = true;
+      await axios
         .get(`api/dash/users`)
         .then((res) => {
           this.users = res.data.users;
@@ -77,6 +85,7 @@ export default {
         .catch(() => {
           this.$router.push({ name: "serverErr" });
         });
+      this.loading = false;
     },
   },
 };

@@ -1,77 +1,76 @@
 <template>
-  <main role="main" class="main-content">
+  <main role="main" class="main-content" style="">
     <div v-if="loading">
       <div><loadingPage /></div>
     </div>
     <div class="container-fluid">
-      <h2 class="h5 page-title pb-5">إضافة عضو جديد</h2>
-
       <form @submit.prevent="saveForm">
         <div class="card shadow mb-4">
           <div class="card-header">
-            <strong class="card-title">إضافة عضو جديد</strong>
+            <strong class="card-title">تعديل البيانات</strong>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-6 align-self-center">
                 <div class="form-group mb-3">
-                  <label for="simpleinput">الإسم</label>
+                  <label for="simpleinput">المشاهدات</label>
                   <input
-                    type="text"
+                    type="number"
                     id="simpleinput"
                     class="form-control"
-                    v-model="form.name"
+                    v-model="form.views"
+                    required
                   />
-                  <span class="text-danger" v-if="errors.name">{{ errors.name[0] }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="example-email">الإيميل</label>
+                  <label for="simpleinput">العملاء</label>
+                  <input
+                    type="number"
+                    id="simpleinput"
+                    class="form-control"
+                    v-model="form.customers"
+                    required
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="simpleinput">الموظفين</label>
+                  <input
+                    type="number"
+                    id="simpleinput"
+                    class="form-control"
+                    v-model="form.employees"
+                    required
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="simpleinput">المشاريع</label>
+                  <input
+                    type="number"
+                    id="simpleinput"
+                    class="form-control"
+                    v-model="form.projects"
+                    required
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="simpleinput">البريد الالكتروني</label>
                   <input
                     type="email"
-                    id="example-email"
-                    name="example-email"
+                    id="simpleinput"
                     class="form-control"
                     v-model="form.email"
+                    required
                   />
-                  <span class="text-danger" v-if="errors.email">{{
-                    errors.email[0]
-                  }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="simpleinput">رقم الهاتف</label>
+                  <label for="simpleinput">الرقم</label>
                   <input
                     type="text"
                     id="simpleinput"
                     class="form-control"
                     v-model="form.number"
+                    required
                   />
-                  <span class="text-danger" v-if="errors.number">{{
-                    errors.number[0]
-                  }}</span>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="example-password">الرقم السري</label>
-                  <input
-                    type="password"
-                    id="example-password"
-                    class="form-control"
-                    v-model="form.password"
-                  />
-                  <span class="text-danger" v-if="errors.password">{{
-                    errors.password[0]
-                  }}</span>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="example-palaceholder">تأكيد الرقم السري</label>
-                  <input
-                    type="password"
-                    id="example-palaceholder"
-                    class="form-control"
-                    v-model="form.password_confirmation"
-                  />
-                  <span class="text-danger" v-if="errors.password_confirmation">{{
-                    errors.password_confirmation[0]
-                  }}</span>
                 </div>
                 <button
                   type="submit"
@@ -87,8 +86,8 @@
                 </button>
               </div>
               <!-- /.col -->
-              <div class="col-md-6">
-                <img src="@/assets/signup.gif" alt="" />
+              <div class="col-md-6 align-self-center">
+                <img src="@/assets/faf.png" class="img-thumbnail" alt="" />
               </div>
             </div>
           </div>
@@ -102,23 +101,38 @@
 import loadingPage from "../layouts/laoding.vue";
 
 export default {
-  name: "add_user",
+  name: "edit_info",
   components: { loadingPage },
   data() {
     return {
       loading: false,
       form: {
-        name: "",
+        views: "",
+        customers: "",
+        employees: "",
+        projects: "",
         email: "",
         number: "",
-        password: "",
-        password_confirmation: "",
       },
       errors: [],
     };
   },
-  mounted() {},
+  mounted() {
+    this.fetchInfo();
+  },
   methods: {
+    async fetchInfo() {
+      this.loading = true;
+      await axios
+        .get(`/api/dash/info`)
+        .then((res) => {
+          this.form = res.data.info;
+        })
+        .catch(() => {
+          this.$router.push({ name: "error404" });
+        });
+      this.loading = false;
+    },
     alert() {
       var toastMixin = this.$swal.mixin({
         toast: true,
@@ -127,7 +141,7 @@ export default {
         animation: false,
         position: "top-right",
         showConfirmButton: false,
-        timer: 4000,
+        timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.addEventListener("mouseenter", this.$swal.stopTimer);
@@ -136,19 +150,24 @@ export default {
       });
       toastMixin.fire({
         animation: true,
-        title: "تم إضافة العضو بنجاح",
+        title: "تم تعديل البيانات بنجاح",
       });
     },
     async saveForm() {
       this.loading = true;
       await axios
-        .post(`api/dash/user/add`, this.form)
+        .post(`/api/dash/info/update`, this.form, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        })
         .then(() => {
-          this.$router.push({ name: "users" });
+          this.fetchInfo();
           this.alert();
         })
         .catch((error) => {
-          this.errors = error.response.data.errors;
+          console.log(error);
         });
       this.loading = false;
     },
@@ -156,4 +175,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.main-content {
+  display: flex;
+  align-items: center;
+}
+</style>

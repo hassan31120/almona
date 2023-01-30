@@ -45,7 +45,7 @@
             </li>
           </ul>
         </li>
-        
+
       </ul>
       <div
         class="btn-box w-100 mt-4 mb-1"
@@ -133,7 +133,7 @@ export default {
 
 <style>
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 992px) {
   .navHassan {
     display: none;
   }

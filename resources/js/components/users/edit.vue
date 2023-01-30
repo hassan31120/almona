@@ -1,5 +1,8 @@
 <template>
   <main role="main" class="main-content">
+    <div v-if="loading">
+      <div><loadingPage /></div>
+    </div>
     <div class="container-fluid">
       <!-- <h2 class="h5 page-title pb-5">إضافة عضو جديد</h2> -->
 
@@ -72,10 +75,14 @@
 </template>
 
 <script>
+import loadingPage from "../layouts/laoding.vue";
+
 export default {
   name: "edit_user",
+  components: { loadingPage },
   data() {
     return {
+      loading: false,
       form: {
         name: "",
         email: "",
@@ -110,7 +117,8 @@ export default {
       });
     },
     async user() {
-      axios
+      this.loading = true;
+      await axios
         .get(`/api/dash/user/show/${this.id}`)
         .then((res) => {
           this.form = res.data.user;
@@ -118,9 +126,11 @@ export default {
         .catch(() => {
           this.$router.push({ name: "error404" });
         });
+      this.loading = false;
     },
     async saveForm() {
-      axios
+      this.loading = true;
+      await axios
         .post(`/api/dash/user/edit/${this.id}`, this.form)
         .then(() => {
           this.user();
@@ -130,6 +140,7 @@ export default {
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
+      this.loading = false;
     },
   },
 };

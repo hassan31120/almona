@@ -10,6 +10,8 @@ import edit_catPage from "../pages/cats/edit_catPage.vue";
 import login from "../components/auth/login.vue";
 import error404 from "../components/errors/error404.vue";
 import error500 from "../components/errors/error500.vue";
+import infoPage from "../pages/info/infoPage.vue";
+import edit_infoPage from "../pages/info/edit_infoPage.vue";
 
 const routes = [
     {
@@ -138,6 +140,36 @@ const routes = [
                     next();
                 })
                 .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/info",
+        name: "info",
+        component: infoPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_info",
+        name: "edit_info",
+        component: edit_infoPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
                     return next({ name: "login" });
                 });
         },

@@ -60,12 +60,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="data">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'info' }"
                 ><span class="ml-1 item-text">عرض البيانات</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'edit_info' }"
                 ><span class="ml-1 item-text">تعديل البيانات</span>
               </router-link>
             </li>
