@@ -83,12 +83,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="team">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'team' }"
                 ><span class="ml-1 item-text">كل الأعضاء</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_team' }"
                 ><span class="ml-1 item-text">إضافة عضو جديد</span>
               </router-link>
             </li>
@@ -106,12 +106,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="partners">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'partners' }"
                 ><span class="ml-1 item-text">كل الشركاء</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_partner' }"
                 ><span class="ml-1 item-text">إضافة شريك جديد</span>
               </router-link>
             </li>

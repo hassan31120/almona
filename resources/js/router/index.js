@@ -12,6 +12,12 @@ import error404 from "../components/errors/error404.vue";
 import error500 from "../components/errors/error500.vue";
 import infoPage from "../pages/info/infoPage.vue";
 import edit_infoPage from "../pages/info/edit_infoPage.vue";
+import teamPage from "../pages/team/teamPage.vue";
+import add_teamPage from "../pages/team/add_teamPage.vue";
+import edit_teamPage from "../pages/team/edit_teamPage.vue";
+import partnersPage from "../pages/partners/partnersPage.vue";
+import add_partnerPage from "../pages/partners/add_partnerPage.vue";
+import edit_partnerPage from "../pages/partners/edit_partnerPage.vue";
 
 const routes = [
     {
@@ -170,6 +176,96 @@ const routes = [
                     next();
                 })
                 .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/team",
+        name: "team",
+        component: teamPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_team",
+        name: "add_team",
+        component: add_teamPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_team/:id",
+        name: "edit_team",
+        component: edit_teamPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/partners",
+        name: "partners",
+        component: partnersPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_partner",
+        name: "add_partner",
+        component: add_partnerPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_partner/:id",
+        name: "edit_partner",
+        component: edit_partnerPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
                     return next({ name: "login" });
                 });
         },
