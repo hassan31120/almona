@@ -11,7 +11,7 @@ import navbar from "../../components/layouts/navbar.vue";
 import sidebar from "../../components/layouts/sidebar.vue";
 import team from "../../components/team/all.vue";
 export default {
-  name: "catsPage",
+  name: "teamPage",
   components: { navbar, sidebar, team },
 };
 </script>

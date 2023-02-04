@@ -2,17 +2,17 @@
   <div class="wrapper">
     <navbar />
     <sidebar />
-    <partners />
+    <apps />
   </div>
 </template>
 
 <script>
 import navbar from "../../components/layouts/navbar.vue";
 import sidebar from "../../components/layouts/sidebar.vue";
-import partners from "../../components/partners/all.vue";
+import apps from "../../components/apps/all.vue";
 export default {
-  name: "partnersPage",
-  components: { navbar, sidebar, partners },
+  name: "appsPage",
+  components: { navbar, sidebar, apps },
 };
 </script>
 

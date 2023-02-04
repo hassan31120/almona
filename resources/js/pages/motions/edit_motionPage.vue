@@ -2,17 +2,17 @@
   <div class="wrapper">
     <navbar />
     <sidebar />
-    <partners />
+    <edit_motion />
   </div>
 </template>
 
 <script>
 import navbar from "../../components/layouts/navbar.vue";
 import sidebar from "../../components/layouts/sidebar.vue";
-import partners from "../../components/partners/all.vue";
+import edit_motion from "../../components/motions/edit.vue";
 export default {
-  name: "partnersPage",
-  components: { navbar, sidebar, partners },
+  name: "edit_motionPage",
+  components: { navbar, sidebar, edit_motion },
 };
 </script>
 

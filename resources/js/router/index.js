@@ -18,6 +18,29 @@ import edit_teamPage from "../pages/team/edit_teamPage.vue";
 import partnersPage from "../pages/partners/partnersPage.vue";
 import add_partnerPage from "../pages/partners/add_partnerPage.vue";
 import edit_partnerPage from "../pages/partners/edit_partnerPage.vue";
+import servicesPage from "../pages/services/servicesPage.vue";
+import add_servicePage from "../pages/services/add_servicePage.vue";
+import edit_servicePage from "../pages/services/edit_servicePage.vue";
+import appsPage from "../pages/apps/appsPage.vue";
+import add_appPage from "../pages/apps/add_appPage.vue";
+import edit_appPage from "../pages/apps/edit_appPage.vue";
+import appCatsPage from "../pages/apps/appCatsPage.vue";
+import add_appCatPage from "../pages/apps/add_appCatPage.vue";
+import edit_appCatPage from "../pages/apps/edit_appCatPage.vue";
+import productsPage from "../pages/products/productsPage.vue";
+import add_productPage from "../pages/products/add_productPage.vue";
+import edit_productPage from "../pages/products/edit_productPage.vue";
+import productCatsPage from "../pages/products/productCatsPage.vue";
+import add_productCatPage from "../pages/products/add_productCatPage.vue";
+import edit_productCatPage from "../pages/products/edit_productCatPage.vue";
+import motionsPage from "../pages/motions/motionsPage.vue";
+import add_motionPage from "../pages/motions/add_motionPage.vue";
+import edit_motionPage from "../pages/motions/edit_motionPage.vue";
+import motionCatsPage from "../pages/motions/motionCatsPage.vue";
+import add_motionCatPage from "../pages/motions/add_motionCatPage.vue";
+import edit_motionCatPage from "../pages/motions/edit_motionCatPage.vue";
+import ordersPage from "../pages/orders/ordersPage.vue";
+import contactsPage from "../pages/contacts/contactsPage.vue";
 
 const routes = [
     {
@@ -259,6 +282,351 @@ const routes = [
         path: "/edit_partner/:id",
         name: "edit_partner",
         component: edit_partnerPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/services",
+        name: "services",
+        component: servicesPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_service",
+        name: "add_service",
+        component: add_servicePage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_service/:id",
+        name: "edit_service",
+        component: edit_servicePage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/app_cats",
+        name: "app_cats",
+        component: appCatsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_app_cat",
+        name: "add_app_cat",
+        component: add_appCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_app_cat/:id",
+        name: "edit_app_cat",
+        component: edit_appCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/apps",
+        name: "apps",
+        component: appsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_app",
+        name: "add_app",
+        component: add_appPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_app/:id",
+        name: "edit_app",
+        component: edit_appPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/product_cats",
+        name: "product_cats",
+        component: productCatsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_product_cat",
+        name: "add_product_cat",
+        component: add_productCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_product_cat/:id",
+        name: "edit_product_cat",
+        component: edit_productCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/products",
+        name: "products",
+        component: productsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_product",
+        name: "add_product",
+        component: add_productPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_product/:id",
+        name: "edit_product",
+        component: edit_productPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/motion_cats",
+        name: "motion_cats",
+        component: motionCatsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_motion_cat",
+        name: "add_motion_cat",
+        component: add_motionCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_motion_cat/:id",
+        name: "edit_motion_cat",
+        component: edit_motionCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/motions",
+        name: "motions",
+        component: motionsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_motion",
+        name: "add_motion",
+        component: add_motionPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_motion/:id",
+        name: "edit_motion",
+        component: edit_motionPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/orders",
+        name: "orders",
+        component: ordersPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/contacts",
+        name: "contacts",
+        component: contactsPage,
         beforeEnter: (to, from, next) => {
             axios
                 .get(`api/authenticated`)

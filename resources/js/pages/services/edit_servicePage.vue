@@ -2,17 +2,17 @@
   <div class="wrapper">
     <navbar />
     <sidebar />
-    <partners />
+    <edit_service />
   </div>
 </template>
 
 <script>
 import navbar from "../../components/layouts/navbar.vue";
 import sidebar from "../../components/layouts/sidebar.vue";
-import partners from "../../components/partners/all.vue";
+import edit_service from "../../components/services/edit.vue";
 export default {
-  name: "partnersPage",
-  components: { navbar, sidebar, partners },
+  name: "edit_servicePage",
+  components: { navbar, sidebar, edit_service },
 };
 </script>
 

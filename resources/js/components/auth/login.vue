@@ -1,5 +1,8 @@
 <template>
   <div class="wrapper vh-100" style="overflow: hidden">
+    <div v-if="loading">
+      <div><loadingPage /></div>
+    </div>
     <div class="row align-items-center h-100">
       <div class="col-lg-6 d-lg-flex" style="width: 100%; height: 100%">
         <img src="@/assets/login.png" alt="" style="" />
@@ -63,9 +66,11 @@
 </template>
 
 <script>
+import loadingPage from "../layouts/laoding.vue";
+
 export default {
   name: "login",
-
+  components: { loadingPage },
   data() {
     return {
       form: {
@@ -73,12 +78,14 @@ export default {
         password: "",
       },
       errors: [],
+      loading: false,
     };
   },
 
   methods: {
-    saveForm() {
-      axios
+    async saveForm() {
+      this.loading = true;
+      await axios
         .post(`api/dashLogin`, this.form)
         .then(() => {
           this.$router.push({ name: "home" });
@@ -86,6 +93,7 @@ export default {
         .catch((error) => {
           this.errors = error.response.data;
         });
+      this.loading = false;
     },
   },
 };
