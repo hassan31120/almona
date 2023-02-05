@@ -7,7 +7,7 @@
       <h2 class="h5 page-title pb-5">كل أقسام المنتجات</h2>
 
       <table class="table mt-5 table-hover">
-        <thead style="background-color: #ff7c00">
+        <thead style="background-color: #e4b75d">
           <tr>
             <th scope="col">#</th>
             <th scope="col">الإسم</th>

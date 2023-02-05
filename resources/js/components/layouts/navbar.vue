@@ -49,7 +49,7 @@
       </ul>
       <div
         class="btn-box w-100 mt-4 mb-1"
-        style="background-color: #ff7c00; border-radius: 50px"
+        style="background-color: #e4b75d; border-radius: 50px"
       >
         <button @click.prevent="logout" class="btn mb-2 btn-lg btn-block text-white">
           <i class="fe fe-log-out fe-12 mr-2"></i><span class="small">تسجيل الخروج</span>

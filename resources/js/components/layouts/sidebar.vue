@@ -17,13 +17,9 @@
         <router-link
           class="navbar-brand mx-auto mt-2 flex-fill text-center"
           :to="{ name: 'home' }"
-          ><img src="@/assets/faf.png" alt="logo" width="220" height="60" />
+          ><img src="@/assets/logo.png" alt="logo" width="150" />
         </router-link>
       </div>
-
-      <p class="text-muted nav-heading mt-4 mb-1">
-        <span>Almona</span>
-      </p>
       <ul class="navbar-nav flex-fill w-100 mb-2">
         <li class="nav-item dropdown">
           <a
@@ -335,10 +331,15 @@
       <div class="btn-box w-100 mt-4 mb-1" v-if="log == 1">
         <button
           @click.prevent="logout"
-          class="btn mb-2 btn-lg btn-block text-white"
-          style="background-color: #ff7c00; border-radius: 50px"
+          class="btn mb-2 btn-lg btn-block"
+          style="
+            background-color: #e4b75d;
+            border-radius: 50px;
+            color: #333333 !important;
+          "
         >
-          <i class="fe fe-log-out fe-12 mr-2"></i><span class="small">تسجيل الخروج</span>
+          <i class="fe fe-log-out fe-12 mr-2" style="font-weight: 700 !important"></i
+          ><span class="small" style="font-weight: 700 !important">تسجيل الخروج</span>
         </button>
       </div>
     </nav>
@@ -357,8 +358,8 @@ export default {
     this.auth();
   },
   methods: {
-    logout() {
-      axios.post(`api/logout`).then(() => {
+    async logout() {
+      await axios.post(`api/logout`).then(() => {
         this.$router.push({ name: "login" });
       });
     },

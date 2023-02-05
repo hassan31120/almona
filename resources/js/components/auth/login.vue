@@ -1,13 +1,9 @@
 <template>
-  <div class="wrapper vh-100" style="overflow: hidden">
+  <div class="wrapper vh-100" style="overflow: hidden; background-color: #333333">
     <div v-if="loading">
       <div><loadingPage /></div>
     </div>
-    <div class="row align-items-center h-100">
-      <div class="col-lg-6 d-lg-flex" style="width: 100%; height: 100%">
-        <img src="@/assets/login.png" alt="" style="" />
-      </div>
-      <!-- ./col -->
+    <div class="row align-items-center d-felx justify-content-center h-100">
       <div class="col-lg-6">
         <div class="w-50 mx-auto">
           <form @submit.prevent="saveForm" class="mx-auto text-center">
@@ -15,9 +11,8 @@
               class="navbar-brand mx-auto mt-2 flex-fill text-center"
               href="./index.html"
             >
-              <img src="@/assets/faf.png" alt="" style="width: 300px" />
+              <img src="@/assets/logoGold.png" alt="" style="width: 300px" />
             </a>
-            <h1 class="h6 mb-3">تسجيل الدخول</h1>
             <div class="form-group">
               <input
                 type="email"
@@ -49,11 +44,16 @@
               </label>
             </div> -->
             <button
-              class="btn btn-lg btn-block text-white"
-              style="background-color: #ff7c00; border-radius: 10px"
+              class="btn btn-lg btn-block"
+              style="
+                background-color: #e4b75d;
+                border-radius: 10px;
+                color: #333333;
+                font-weight: 700 !important;
+              "
               type="submit"
             >
-              أدخلني!
+              تسجيل الدخول
             </button>
           </form>
         </div>

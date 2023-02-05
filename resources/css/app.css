@@ -6,8 +6,13 @@ body {
     overflow-x: hidden;
 }
 
+table th {
+    color: #333333 !important;
+    font-weight: 600 !important;
+}
+
 ul li a:hover {
-    color: #ff7c00 !important;
+    color: #e4b75d !important;
 }
 
 td a {
@@ -16,7 +21,7 @@ td a {
 }
 
 td a:hover {
-    color: #ff7c00 !important;
+    color: #e4b75d !important;
     text-decoration: none;
 }
 
@@ -73,7 +78,7 @@ td a:hover {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #ff7c00;
+    background: #e4b75d;
     transition: all 2s ease-in-out !important;
 }
 

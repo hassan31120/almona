@@ -18,7 +18,7 @@
                       <div class="btn-box w-100 mt-4 mb-1">
                         <router-link
                           class="btn mb-2 btn-lg text-white"
-                          style="background-color: #ff7c00; border-radius: 50px"
+                          style="background-color: #e4b75d; border-radius: 50px"
                           :to="{ name: 'home' }"
                           ><span>Go to Home Page</span>
                         </router-link>
