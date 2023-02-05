@@ -20,7 +20,7 @@ class ArticleResource extends JsonResource
             'image'     => asset($this->image),
             'banner'    => asset($this->banner),
             'desc'      => $this->desc,
-            'date'      => $this->created_at->format('d/m/Y')
+            // 'date'      => $this->created_at->format('d/m/Y')
         ];
     }
 }

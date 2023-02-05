@@ -7,7 +7,7 @@
       <form @submit.prevent="saveForm">
         <div class="card shadow mb-4">
           <div class="card-header">
-            <strong class="card-title">تعديل التطبيق </strong>
+            <strong class="card-title">إضافة تصميم جديد</strong>
           </div>
           <div class="card-body">
             <div class="row">
@@ -25,18 +25,6 @@
                   }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="desc">الوصف</label>
-                  <textarea
-                    name="desc"
-                    id="desc"
-                    cols="30"
-                    rows="8"
-                    class="form-control"
-                    v-model="form.desc"
-                  ></textarea>
-                  <span class="text-danger" v-if="errors.desc">{{ errors.desc[0] }}</span>
-                </div>
-                <div class="form-group mb-3">
                   <label for="image">الصورة</label>
                   <input
                     type="file"
@@ -45,25 +33,15 @@
                     class="form-control"
                     ref="image"
                     @change="selectImage"
+
                   />
                   <span class="text-danger" v-if="errors.image">{{
                     errors.image[0]
                   }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="link">اللينك</label>
-                  <input
-                    type="text"
-                    id="link"
-                    class="form-control"
-                    v-model="form.link"
-                    required
-                  />
-                  <span class="text-danger" v-if="errors.link">{{ errors.link[0] }}</span>
-                </div>
-                <div class="form-group mb-3">
                   <label for="cat_id">القسم</label>
-                  <select v-model="form.cat_id" class="form-control" id="cat_id" required>
+                  <select v-model="form.cat_id" class="form-control" id="cat_id" >
                     <option :value="cat.id" v-for="cat in cats" :key="cat.id">
                       {{ cat.name }}
                     </option>
@@ -75,7 +53,7 @@
               </div>
               <!-- /.col -->
               <div class="col-md-6 align-self-center">
-                <img :src="form.image" class="img-thumbnail" alt="" />
+                <img src="@/assets/UsabilityTesting.gif" alt="" />
               </div>
               <button
                 type="submit"
@@ -101,40 +79,24 @@
 import loadingPage from "../layouts/laoding.vue";
 
 export default {
-  name: "edit_motion",
+  name: "add_graphic",
   components: { loadingPage },
   data() {
     return {
       loading: false,
       form: {
         title: "",
-        desc: "",
         image: "",
-        link: "",
         cat_id: "",
       },
       errors: [],
       cats: [],
-      id: this.$route.params.id,
     };
   },
   mounted() {
-    this.fetchmotion();
     this.fetchCats();
   },
   methods: {
-    async fetchmotion() {
-      this.loading = true;
-      await axios
-        .get(`/api/dash/motion/show/${this.id}`)
-        .then((res) => {
-          this.form = res.data.video;
-        })
-        .catch(() => {
-          this.$router.push({ name: "error404" });
-        });
-      this.loading = false;
-    },
     alert() {
       var toastMixin = this.$swal.mixin({
         toast: true,
@@ -152,38 +114,37 @@ export default {
       });
       toastMixin.fire({
         animation: true,
-        title: "تم تعديل الفيديو بنجاح",
+        title: "تم إضافة التطبيق بنجاح",
       });
     },
-
-    async fetchCats() {
-      this.loading = true;
-      await axios
-        .get(`/api/dash/motioncats`)
-        .then((res) => {
-          this.cats = res.data.cats;
-        })
-        .catch(() => {
-          this.$router.push({ name: "serverErr" });
-        });
-      this.loading = false;
-    },
-
     async saveForm() {
       this.loading = true;
       await axios
-        .post(`/api/dash/motion/update/${this.id}`, this.form, {
+        .post(`api/dash/graphic/store`, this.form, {
           headers: {
             Accept: "application/json",
             "Content-Type": "multipart/form-data",
           },
         })
         .then(() => {
-          this.$router.push({ name: "motions" });
+          this.$router.push({ name: "graphics" });
           this.alert();
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
+        });
+      this.loading = false;
+    },
+
+    async fetchCats() {
+      this.loading = true;
+      await axios
+        .get(`/api/dash/graphiccats`)
+        .then((res) => {
+          this.cats = res.data.cats;
+        })
+        .catch(() => {
+          this.$router.push({ name: "serverErr" });
         });
       this.loading = false;
     },

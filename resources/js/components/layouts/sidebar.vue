@@ -129,12 +129,12 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="articles">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'partners' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'articles' }"
                 ><span class="ml-1 item-text">كل المقالات</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_partner' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_article' }"
                 ><span class="ml-1 item-text">إضافة مقال جديد</span>
               </router-link>
             </li>
@@ -218,22 +218,22 @@
           </a>
           <ul class="collapse list-unstyled pl-4 w-100" id="graphics">
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'graphic_cats' }"
                 ><span class="ml-1 item-text">كل الأقسام</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_graphic_cat' }"
                 ><span class="ml-1 item-text">إضافة قسم جديد</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'cats' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'graphics' }"
                 ><span class="ml-1 item-text">كل التصاميم</span>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pl-3" :to="{ name: 'add_cat' }"
+              <router-link class="nav-link pl-3" :to="{ name: 'add_graphic' }"
                 ><span class="ml-1 item-text">إضافة تصميم جديد</span>
               </router-link>
             </li>

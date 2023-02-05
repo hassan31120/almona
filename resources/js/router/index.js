@@ -18,6 +18,9 @@ import edit_teamPage from "../pages/team/edit_teamPage.vue";
 import partnersPage from "../pages/partners/partnersPage.vue";
 import add_partnerPage from "../pages/partners/add_partnerPage.vue";
 import edit_partnerPage from "../pages/partners/edit_partnerPage.vue";
+import articlesPage from "../pages/articles/articlesPage.vue";
+import add_articlePage from "../pages/articles/add_articlePage.vue";
+import edit_articlePage from "../pages/articles/edit_articlePage.vue";
 import servicesPage from "../pages/services/servicesPage.vue";
 import add_servicePage from "../pages/services/add_servicePage.vue";
 import edit_servicePage from "../pages/services/edit_servicePage.vue";
@@ -39,6 +42,12 @@ import edit_motionPage from "../pages/motions/edit_motionPage.vue";
 import motionCatsPage from "../pages/motions/motionCatsPage.vue";
 import add_motionCatPage from "../pages/motions/add_motionCatPage.vue";
 import edit_motionCatPage from "../pages/motions/edit_motionCatPage.vue";
+import graphicsPage from "../pages/graphics/graphicsPage.vue";
+import add_graphicPage from "../pages/graphics/add_graphicPage.vue";
+import edit_graphicPage from "../pages/graphics/edit_graphicPage.vue";
+import graphicCatsPage from "../pages/graphics/graphicCatsPage.vue";
+import add_graphicCatPage from "../pages/graphics/add_graphicCatPage.vue";
+import edit_graphicCatPage from "../pages/graphics/edit_graphicCatPage.vue";
 import ordersPage from "../pages/orders/ordersPage.vue";
 import contactsPage from "../pages/contacts/contactsPage.vue";
 
@@ -282,6 +291,51 @@ const routes = [
         path: "/edit_partner/:id",
         name: "edit_partner",
         component: edit_partnerPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/articles",
+        name: "articles",
+        component: articlesPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_article",
+        name: "add_article",
+        component: add_articlePage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_article/:id",
+        name: "edit_article",
+        component: edit_articlePage,
         beforeEnter: (to, from, next) => {
             axios
                 .get(`api/authenticated`)
@@ -597,6 +651,96 @@ const routes = [
         path: "/edit_motion/:id",
         name: "edit_motion",
         component: edit_motionPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/graphic_cats",
+        name: "graphic_cats",
+        component: graphicCatsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_graphic_cat",
+        name: "add_graphic_cat",
+        component: add_graphicCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_graphic_cat/:id",
+        name: "edit_graphic_cat",
+        component: edit_graphicCatPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch(() => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/graphics",
+        name: "graphics",
+        component: graphicsPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/add_graphic",
+        name: "add_graphic",
+        component: add_graphicPage,
+        beforeEnter: (to, from, next) => {
+            axios
+                .get(`api/authenticated`)
+                .then(() => {
+                    next();
+                })
+                .catch((err) => {
+                    return next({ name: "login" });
+                });
+        },
+    },
+    {
+        path: "/edit_graphic/:id",
+        name: "edit_graphic",
+        component: edit_graphicPage,
         beforeEnter: (to, from, next) => {
             axios
                 .get(`api/authenticated`)

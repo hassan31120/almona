@@ -7,88 +7,80 @@
       <form @submit.prevent="saveForm">
         <div class="card shadow mb-4">
           <div class="card-header">
-            <strong class="card-title">تعديل التطبيق </strong>
+            <strong class="card-title">تعديل المقال </strong>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-6 align-self-center">
                 <div class="form-group mb-3">
-                  <label for="title">العنوان</label>
+                  <label for="simpleinput">العنوان</label>
                   <input
                     type="text"
-                    id="title"
+                    id="simpleinput"
                     class="form-control"
-                    v-model="form.title"
+                    v-model="this.form.title"
                   />
                   <span class="text-danger" v-if="errors.title">{{
                     errors.title[0]
                   }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="desc">الوصف</label>
-                  <textarea
-                    name="desc"
-                    id="desc"
-                    cols="30"
-                    rows="8"
-                    class="form-control"
-                    v-model="form.desc"
-                  ></textarea>
-                  <span class="text-danger" v-if="errors.desc">{{ errors.desc[0] }}</span>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="image">الصورة</label>
+                  <label for="example-email">الصورة</label>
                   <input
                     type="file"
-                    id="image"
-                    name="image"
+                    id="example-email"
+                    name="example-email"
                     class="form-control"
-                    ref="image"
-                    @change="selectImage"
+                    ref="file"
+                    @change="selectFile"
                   />
                   <span class="text-danger" v-if="errors.image">{{
                     errors.image[0]
                   }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="link">اللينك</label>
-                  <input
-                    type="text"
-                    id="link"
+                  <label for="example-email">المقال</label>
+                  <textarea
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="10"
                     class="form-control"
-                    v-model="form.link"
-                    required
-                  />
-                  <span class="text-danger" v-if="errors.link">{{ errors.link[0] }}</span>
+                    v-model="form.desc"
+                  ></textarea>
+                  <span class="text-danger" v-if="errors.desc">{{ errors.desc[0] }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="cat_id">القسم</label>
-                  <select v-model="form.cat_id" class="form-control" id="cat_id" required>
-                    <option :value="cat.id" v-for="cat in cats" :key="cat.id">
-                      {{ cat.name }}
-                    </option>
-                  </select>
-                  <span class="text-danger" v-if="errors.cat_id">{{
-                    errors.cat_id[0]
+                  <label for="example-email">البانر</label>
+                  <input
+                    type="file"
+                    id="example-email"
+                    name="example-email"
+                    class="form-control"
+                    ref="banner"
+                    @change="selectBanner"
+                  />
+                  <span class="text-danger" v-if="errors.banner">{{
+                    errors.banner[0]
                   }}</span>
                 </div>
+                <button
+                  type="submit"
+                  class="btn"
+                  style="
+                    background-color: #ff7c00;
+                    color: aliceblue;
+                    width: 100px;
+                    font-weight: 600;
+                  "
+                >
+                  تأكيد
+                </button>
               </div>
               <!-- /.col -->
               <div class="col-md-6 align-self-center">
                 <img :src="form.image" class="img-thumbnail" alt="" />
               </div>
-              <button
-                type="submit"
-                class="btn"
-                style="
-                  background-color: #ff7c00;
-                  color: aliceblue;
-                  width: 100px;
-                  font-weight: 600;
-                "
-              >
-                تأكيد
-              </button>
             </div>
           </div>
         </div>
@@ -101,34 +93,31 @@
 import loadingPage from "../layouts/laoding.vue";
 
 export default {
-  name: "edit_motion",
+  name: "edit_article",
   components: { loadingPage },
   data() {
     return {
       loading: false,
       form: {
         title: "",
-        desc: "",
         image: "",
-        link: "",
-        cat_id: "",
+        banner: "",
+        desc: "",
       },
       errors: [],
-      cats: [],
       id: this.$route.params.id,
     };
   },
   mounted() {
-    this.fetchmotion();
-    this.fetchCats();
+    this.fetchCategory();
   },
   methods: {
-    async fetchmotion() {
+    async fetchCategory() {
       this.loading = true;
       await axios
-        .get(`/api/dash/motion/show/${this.id}`)
+        .get(`/api/dash/article/show/${this.id}`)
         .then((res) => {
-          this.form = res.data.video;
+          this.form = res.data.article;
         })
         .catch(() => {
           this.$router.push({ name: "error404" });
@@ -152,44 +141,30 @@ export default {
       });
       toastMixin.fire({
         animation: true,
-        title: "تم تعديل الفيديو بنجاح",
+        title: "تم تعديل المقال بنجاح",
       });
     },
-
-    async fetchCats() {
-      this.loading = true;
-      await axios
-        .get(`/api/dash/motioncats`)
-        .then((res) => {
-          this.cats = res.data.cats;
-        })
-        .catch(() => {
-          this.$router.push({ name: "serverErr" });
-        });
-      this.loading = false;
-    },
-
     async saveForm() {
       this.loading = true;
       await axios
-        .post(`/api/dash/motion/update/${this.id}`, this.form, {
+        .post(`/api/dash/article/update/${this.id}`, this.form, {
           headers: {
             Accept: "application/json",
             "Content-Type": "multipart/form-data",
           },
         })
         .then(() => {
-          this.$router.push({ name: "motions" });
+          this.fetchCategory();
           this.alert();
         })
         .catch((error) => {
-          this.errors = error.response.data.errors;
+          console.log(error);
         });
       this.loading = false;
     },
 
-    selectImage() {
-      this.form.image = this.$refs.image.files[0];
+    selectFile() {
+      this.form.image = this.$refs.file.files[0];
     },
   },
 };

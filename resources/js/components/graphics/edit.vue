@@ -7,7 +7,7 @@
       <form @submit.prevent="saveForm">
         <div class="card shadow mb-4">
           <div class="card-header">
-            <strong class="card-title">تعديل التطبيق </strong>
+            <strong class="card-title">تعديل التصميم </strong>
           </div>
           <div class="card-body">
             <div class="row">
@@ -25,18 +25,6 @@
                   }}</span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="desc">الوصف</label>
-                  <textarea
-                    name="desc"
-                    id="desc"
-                    cols="30"
-                    rows="8"
-                    class="form-control"
-                    v-model="form.desc"
-                  ></textarea>
-                  <span class="text-danger" v-if="errors.desc">{{ errors.desc[0] }}</span>
-                </div>
-                <div class="form-group mb-3">
                   <label for="image">الصورة</label>
                   <input
                     type="file"
@@ -49,17 +37,6 @@
                   <span class="text-danger" v-if="errors.image">{{
                     errors.image[0]
                   }}</span>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="link">اللينك</label>
-                  <input
-                    type="text"
-                    id="link"
-                    class="form-control"
-                    v-model="form.link"
-                    required
-                  />
-                  <span class="text-danger" v-if="errors.link">{{ errors.link[0] }}</span>
                 </div>
                 <div class="form-group mb-3">
                   <label for="cat_id">القسم</label>
@@ -101,16 +78,14 @@
 import loadingPage from "../layouts/laoding.vue";
 
 export default {
-  name: "edit_motion",
+  name: "edit_graphic",
   components: { loadingPage },
   data() {
     return {
       loading: false,
       form: {
         title: "",
-        desc: "",
         image: "",
-        link: "",
         cat_id: "",
       },
       errors: [],
@@ -126,9 +101,9 @@ export default {
     async fetchmotion() {
       this.loading = true;
       await axios
-        .get(`/api/dash/motion/show/${this.id}`)
+        .get(`/api/dash/graphic/show/${this.id}`)
         .then((res) => {
-          this.form = res.data.video;
+          this.form = res.data.graphic;
         })
         .catch(() => {
           this.$router.push({ name: "error404" });
@@ -159,7 +134,7 @@ export default {
     async fetchCats() {
       this.loading = true;
       await axios
-        .get(`/api/dash/motioncats`)
+        .get(`/api/dash/graphiccats`)
         .then((res) => {
           this.cats = res.data.cats;
         })
@@ -172,14 +147,14 @@ export default {
     async saveForm() {
       this.loading = true;
       await axios
-        .post(`/api/dash/motion/update/${this.id}`, this.form, {
+        .post(`/api/dash/graphic/update/${this.id}`, this.form, {
           headers: {
             Accept: "application/json",
             "Content-Type": "multipart/form-data",
           },
         })
         .then(() => {
-          this.$router.push({ name: "motions" });
+          this.$router.push({ name: "graphics" });
           this.alert();
         })
         .catch((error) => {
