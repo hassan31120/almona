@@ -11,12 +11,9 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(6);
         if (count($articles) > 0) {
-            return response()->json([
-                'success' => true,
-                'articles' => ArticleResource::collection($articles)
-            ], 200);
+            return ArticleResource::collection($articles);
         } else {
             return response()->json([
                 'success' => false,

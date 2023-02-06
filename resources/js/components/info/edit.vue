@@ -87,7 +87,7 @@
               </div>
               <!-- /.col -->
               <div class="col-md-6 align-self-center">
-                <img src="@/assets/faf.png" class="img-thumbnail" alt="" />
+                <img src="@/assets/logo.png" class="img-thumbnail" alt="" />
               </div>
             </div>
           </div>

@@ -84,7 +84,7 @@ td a:hover {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #af0128;
+    background: #6c757d;
 }
 
 .delImage button {
@@ -101,3 +101,11 @@ td a:hover {
     border-radius: 5px;
 }
 
+nav ul .haha a {
+    background-color: #6c757d !important;
+    color: #e4b75d !important;
+}
+
+nav ul li a {
+    border-radius: 5px;
+}

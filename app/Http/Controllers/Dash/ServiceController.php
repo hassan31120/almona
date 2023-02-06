@@ -11,12 +11,9 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::all();
+        $services = Service::paginate(6);
         if (count($services) > 0) {
-            return response()->json([
-                'success' => true,
-                'services' => ServiceResource::collection($services)
-            ], 200);
+            return ServiceResource::collection($services);
         } else {
             return response()->json([
                 'success' => false,
@@ -48,7 +45,7 @@ class ServiceController extends Controller
             'msg' => 'service has been addedd successfully'
         ], 200);
     }
-    
+
     public function show($id)
     {
         $service = Service::find($id);

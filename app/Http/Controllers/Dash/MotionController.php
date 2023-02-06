@@ -11,12 +11,9 @@ class MotionController extends Controller
 {
     public function index()
     {
-        $videos = Motion::all();
+        $videos = Motion::paginate(10);
         if (count($videos) > 0) {
-            return response()->json([
-                'success' => true,
-                'videos' => MotionResource::collection($videos)
-            ], 200);
+            return MotionResource::collection($videos);
         } else {
             return response()->json([
                 'success' => false,

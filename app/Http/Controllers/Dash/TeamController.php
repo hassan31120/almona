@@ -16,12 +16,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $team = Team::all();
+        $team = Team::paginate(6);
         if (count($team) > 0) {
-            return response()->json([
-                'success' => true,
-                'teams' => TeamResource::collection($team)
-            ], 200);
+            return TeamResource::collection($team);
         } else {
             return response()->json([
                 'success' => false,

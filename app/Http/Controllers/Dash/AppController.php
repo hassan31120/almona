@@ -12,12 +12,9 @@ class AppController extends Controller
 {
     public function index()
     {
-        $apps = App::all();
+        $apps = App::paginate(6);
         if (count($apps) > 0) {
-            return response()->json([
-                'success' => true,
-                'apps' => AppResource::collection($apps)
-            ], 200);
+            return AppResource::collection($apps);
         } else {
             return response()->json([
                 'success' => false,

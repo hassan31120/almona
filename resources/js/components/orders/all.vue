@@ -34,6 +34,24 @@
           </tr>
         </tbody>
       </table>
+      <!-- pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li
+            class="page-item"
+            v-for="link in pagination.links"
+            :key="link"
+            v-bind:class="[{ disabled: !link.url }, { haha: link.active }]"
+          >
+            <a
+              class="page-link"
+              href="#"
+              v-html="link.label"
+              @click="fetchorders(link.url)"
+            ></a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </main>
 </template>
@@ -49,6 +67,7 @@ export default {
     return {
       orders: [],
       loading: false,
+      pagination: {},
     };
   },
   mounted() {
@@ -76,17 +95,26 @@ export default {
         });
     },
 
-    async fetchorders() {
+    async fetchorders(page_url) {
       this.loading = true;
+      page_url = page_url || `api/dash/orders`;
       await axios
-        .get(`api/dash/orders`)
+        .get(page_url)
         .then((res) => {
-          this.orders = res.data.orders;
+          this.orders = res.data.data;
+          this.makePagination(res.data.meta);
         })
         .catch(() => {
           this.$router.push({ name: "serverErr" });
         });
       this.loading = false;
+    },
+
+    async makePagination(meta) {
+      let pagination = {
+        links: meta.links,
+      };
+      this.pagination = pagination;
     },
   },
 };

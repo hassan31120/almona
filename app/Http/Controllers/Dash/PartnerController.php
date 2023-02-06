@@ -11,12 +11,9 @@ class PartnerController extends Controller
 {
     public function index()
     {
-        $partners = Partner::all();
+        $partners = Partner::paginate(6);
         if (count($partners) > 0) {
-            return response()->json([
-                'success' => true,
-                'partners' => PartnerResource::collection($partners)
-            ], 200);
+            return PartnerResource::collection($partners);
         } else {
             return response()->json([
                 'success' => false,

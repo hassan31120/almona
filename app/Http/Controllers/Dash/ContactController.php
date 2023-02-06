@@ -10,12 +10,9 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::paginate(10);
         if (count($contacts) > 0) {
-            return response()->json([
-                'success' => true,
-                'contacts' => ContactResource::collection($contacts)
-            ], 200);
+            return ContactResource::collection($contacts);
         } else {
             return response()->json([
                 'success' => false,

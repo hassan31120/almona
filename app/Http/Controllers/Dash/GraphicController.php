@@ -11,12 +11,9 @@ class GraphicController extends Controller
 {
     public function index()
     {
-        $graphics = Graphic::all();
+        $graphics = Graphic::paginate(6);
         if (count($graphics) > 0) {
-            return response()->json([
-                'success' => true,
-                'graphics' => GraphicResource::collection($graphics)
-            ], 200);
+            return GraphicResource::collection($graphics);
         } else {
             return response()->json([
                 'success' => false,

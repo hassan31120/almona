@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <h2 class="h5 page-title pb-5">كل الشركاء</h2>
 
-      <table class="table mt-5 table-hover">
+      <table class="table mt-3 table-hover">
         <thead style="background-color: #e4b75d">
           <tr>
             <th scope="col">#</th>
@@ -33,6 +33,24 @@
           </tr>
         </tbody>
       </table>
+      <!-- pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li
+            class="page-item"
+            v-for="link in pagination.links"
+            :key="link"
+            v-bind:class="[{ disabled: !link.url }, { haha: link.active }]"
+          >
+            <a
+              class="page-link"
+              href="#"
+              v-html="link.label"
+              @click="fetchpartners(link.url)"
+            ></a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </main>
 </template>
@@ -48,6 +66,7 @@ export default {
     return {
       partners: [],
       loading: false,
+      pagination: {},
     };
   },
   mounted() {
@@ -75,17 +94,26 @@ export default {
         });
     },
 
-    async fetchpartners() {
+    async fetchpartners(page_url) {
       this.loading = true;
+      page_url = page_url || `api/dash/partners`;
       await axios
-        .get(`api/dash/partners`)
+        .get(page_url)
         .then((res) => {
-          this.partners = res.data.partners;
+          this.partners = res.data.data;
+          this.makePagination(res.data.meta);
         })
         .catch(() => {
           this.$router.push({ name: "serverErr" });
         });
       this.loading = false;
+    },
+
+    async makePagination(meta) {
+      let pagination = {
+        links: meta.links,
+      };
+      this.pagination = pagination;
     },
   },
 };

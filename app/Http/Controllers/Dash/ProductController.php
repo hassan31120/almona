@@ -11,12 +11,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(6);
         if (count($products) > 0) {
-            return response()->json([
-                'success' => true,
-                'products' => ProductResource::collection($products)
-            ], 200);
+            return ProductResource::collection($products);
         } else {
             return response()->json([
                 'success' => false,

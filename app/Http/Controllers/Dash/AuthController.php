@@ -58,12 +58,9 @@ class AuthController extends Controller
 
     public function users()
     {
-        $users = User::all();
+        $users = User::paginate(10);
         if (count($users) > 0) {
-            return response()->json([
-                'success' => true,
-                'users' => UserResource::collection($users)
-            ], 200);
+            return UserResource::collection($users);
         }
     }
 

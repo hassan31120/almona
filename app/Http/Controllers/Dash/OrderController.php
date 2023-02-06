@@ -10,12 +10,9 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::paginate(10);
         if (count($orders) > 0) {
-            return response()->json([
-                'success' => true,
-                'orders' => OrderResource::collection($orders)
-            ], 200);
+            return OrderResource::collection($orders);
         } else {
             return response()->json([
                 'success' => false,
