@@ -71,6 +71,7 @@ Route::group(['prefix' => 'dash'], function () {
 
     // Info
     Route::get('/info', [InfoController::class, 'index']);
+    Route::get('/all', [InfoController::class, 'all']);
     Route::post('/info/update', [InfoController::class, 'update']);
 
     // partners

@@ -7,12 +7,16 @@
       <div class="col-lg-6">
         <div class="w-50 mx-auto">
           <form @submit.prevent="saveForm" class="mx-auto text-center">
-            <a
+            <router-link
               class="navbar-brand mx-auto mt-2 flex-fill text-center"
-              href="./index.html"
-            >
-              <img src="@/assets/logoGold.png" alt="" style="width: 300px" />
-            </a>
+              :to="{ name: 'home' }"
+              ><img
+                src="@/assets/logoGold.png"
+                class="logo"
+                alt="logo"
+                style="width: 300px"
+              />
+            </router-link>
             <div class="form-group">
               <input
                 type="email"
@@ -99,4 +103,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+@media only screen and (max-width: 992px) {
+  .logo {
+    width: 200px !important;
+  }
+}
+</style>
