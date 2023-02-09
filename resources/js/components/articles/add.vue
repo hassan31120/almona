@@ -38,16 +38,14 @@
                     errors.image[0]
                   }}</span>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group mb-3" style="direction: ltr !important">
                   <label for="example-email">المقال</label>
-                  <textarea
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="10"
-                    class="form-control"
-                    v-model="form.desc"
-                  ></textarea>
+                  <QuillEditor
+                    theme="snow"
+                    v-model:content="form.desc"
+                    content-type="html"
+                    toolbar="full"
+                  />
                   <span class="text-danger" v-if="errors.desc">{{ errors.desc[0] }}</span>
                 </div>
                 <div class="form-group mb-3">

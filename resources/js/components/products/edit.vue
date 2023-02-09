@@ -25,30 +25,24 @@
                     errors.title[0]
                   }}</span>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group mb-3" style="direction: ltr !important">
                   <label for="desc">الوصف</label>
-                  <textarea
-                    name="desc"
-                    id="desc"
-                    cols="30"
-                    rows="8"
-                    class="form-control"
-                    v-model="form.desc"
-                    required
-                  ></textarea>
+                  <QuillEditor
+                    theme="snow"
+                    v-model:content="form.desc"
+                    content-type="html"
+                    toolbar="full"
+                  />
                   <span class="text-danger" v-if="errors.desc">{{ errors.desc[0] }}</span>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group mb-3" style="direction: ltr !important">
                   <label for="ads">المميزات</label>
-                  <textarea
-                    name="ads"
-                    id="ads"
-                    cols="30"
-                    rows="8"
-                    class="form-control"
-                    v-model="form.ads"
-                    required
-                  ></textarea>
+                  <QuillEditor
+                    theme="snow"
+                    v-model:content="form.ads"
+                    content-type="html"
+                    toolbar="full"
+                  />
                   <span class="text-danger" v-if="errors.ads">{{ errors.ads[0] }}</span>
                 </div>
                 <div class="form-group mb-3">
