@@ -24,7 +24,7 @@ export default {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(255, 255, 255);
+  background-color: transparent;
   z-index: 999;
 }
 .loading-container,

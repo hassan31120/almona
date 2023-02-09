@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->get('/authenticated', function () {
+Route::middleware('isAdmin')->get('/authenticated', function () {
     return true;
 });
 
@@ -61,7 +61,7 @@ Route::get('/graphics', [GetController::class, 'graphics']);
 
 
 // this is the start of the dashboard apis :
-Route::group(['prefix' => 'dash'], function () {
+Route::group(['prefix' => 'dash', 'middleware' => 'isAdmin'], function () {
     // Users
     Route::get('users', [AuthController::class, 'users']);
     Route::get('user/show/{id}', [AuthController::class, 'show']);

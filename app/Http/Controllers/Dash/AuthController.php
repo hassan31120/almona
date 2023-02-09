@@ -40,10 +40,16 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            return response()->json([
-                'success' => true,
-                'user' => new UserResource(Auth::user()),
-            ], 200);
+            if ($user->userType == 'admin') {
+                return response()->json([
+                    'success' => true,
+                    'user' => new UserResource(Auth::user()),
+                ], 200);
+            } else {
+                return response()->json([
+                    'password' => ['عفوا, انت لست مسؤول وليس مصرح لك بالدخول الى لوحة التحكم']
+                ], 404);
+            }
         }
 
         return response()->json([

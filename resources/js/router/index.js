@@ -87,7 +87,7 @@ const routes = [
                 .then(() => {
                     return next({ name: "home" });
                 })
-                .catch((err) => {
+                .catch(() => {
                     next();
                 });
         },
