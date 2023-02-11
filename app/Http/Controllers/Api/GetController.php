@@ -96,7 +96,7 @@ class GetController extends Controller
 
     public function articles()
     {
-        $articles = Article::paginate(3);
+        $articles = Article::paginate(6);
         if (count($articles) > 0) {
             return  ArticleResource::collection($articles);
         } else {
