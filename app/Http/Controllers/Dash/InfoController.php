@@ -37,7 +37,8 @@ class InfoController extends Controller
         }
     }
 
-    public function all(){
+    public function all()
+    {
         $users = User::all();
         $team = Team::all();
         $partners = Partner::all();
@@ -75,7 +76,7 @@ class InfoController extends Controller
             'customers' => 'required|numeric',
             'employees' => 'required|numeric',
             'projects' => 'required|numeric',
-            'number' => 'required',
+            'number' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/',
             'email' => 'required|email',
         ]);
         $info->update($request->all());
