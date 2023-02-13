@@ -76,7 +76,7 @@ class InfoController extends Controller
             'customers' => 'required|numeric',
             'employees' => 'required|numeric',
             'projects' => 'required|numeric',
-            'number' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' => 'required|email',
         ]);
         $info->update($request->all());
