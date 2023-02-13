@@ -76,7 +76,7 @@ class InfoController extends Controller
             'customers' => 'required|numeric',
             'employees' => 'required|numeric',
             'projects' => 'required|numeric',
-            'number' => 'required|numeric',
+            'number' => 'required',
             'email' => 'required|email',
         ]);
         $info->update($request->all());
